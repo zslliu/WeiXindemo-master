@@ -1,6 +1,7 @@
 package myapplication.t.example.com.weixin;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,14 +45,13 @@ public class FyFragment extends Fragment {
     private TranslateHandler handler;
     private String previousTitle;
     private View view;
-
+    private Button jz1;
     private static final int SUCCEE_RESULT = 10;
     private static final int ERROR_TEXT_TOO_LONG = 20;
     private static final int ERROR_CANNOT_TRANSLATE = 30;
     private static final int ERROR_UNSUPPORT_LANGUAGE = 40;
     private static final int ERROR_WRONG_KEY = 50;
     private static final int ERROR_WRONG_RESULT = 60;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,12 +66,24 @@ public class FyFragment extends Fragment {
         // Inflate the layout for this fragment
         this.view= inflater.inflate(R.layout.fragment_fy, container, false);
         edit = (EditText)view.findViewById(R.id.edit);
+        jz1=(Button)view.findViewById(R.id.jz);
         search = (TextView)view.findViewById(R.id.search);
         search.setOnClickListener(new searchListener());
         text = (TextView)view.findViewById(R.id.text);
         handler = new TranslateHandler(this, text);
+        jz1.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                //SoilsenerActivity.class为想要跳转的Activity
+                intent.setClass(getActivity(), JzActivity.class);
+                startActivity(intent);
+            }
+        });
         return  view;
     }
+
     private class searchListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {

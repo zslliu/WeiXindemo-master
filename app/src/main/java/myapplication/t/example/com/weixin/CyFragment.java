@@ -30,6 +30,7 @@ public class CyFragment extends Fragment {
     private Button send;
     private TextView tresponse;
     private TextView tresponse1;
+    private TextView tresponse2;
     private String baseurl="http://v.juhe.cn/chengyu/query";
     private String basekey="0f9a433ac8b0c35009db0e6c362d4d4d";
 
@@ -49,6 +50,7 @@ public class CyFragment extends Fragment {
         tinput = (EditText) view.findViewById(R.id.input1);
         tresponse = (TextView) view.findViewById(R.id.response);
         tresponse1=(TextView)view.findViewById(R.id.response_1);
+        tresponse2=(TextView)view.findViewById(R.id.response_2);
         send.setOnClickListener(new searchListener());
         return  view;
     }
@@ -101,6 +103,7 @@ public class CyFragment extends Fragment {
                         JSONObject jObj1 = jobj.getJSONObject("result");
                         tresponse.setText(String.format("%s",jObj1.getString("chengyujs")));
                         tresponse1.setText(String.format("%s",jObj1.getString("from_")));
+                        tresponse2.setText(String.format("%s",jObj1.getString("example")));
                         try {
 
                         } catch (NumberFormatException e) {

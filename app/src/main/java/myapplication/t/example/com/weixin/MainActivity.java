@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         intent.putExtra("tab", tab);
         intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP | FLAG_ACTIVITY_SINGLE_TOP);
         activity.startActivity(intent);
-
     }
 
     /**

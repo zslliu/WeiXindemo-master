@@ -1,4 +1,5 @@
 <resources>
+m ]
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
@@ -7,5 +8,5 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <color name="light_dark">#313638</color>
+    <color name="light_dark">#4478d9</color>
 </resources>

@@ -8,5 +8,7 @@
     <color name="blue_pressed">#ff0099cc</color>
     <color name="wenben">#4AC3FF</color>
     <color name="light_gray">#edeef0</color>
+    <color name="ty">#4478d9</color>
+    <color name="tm">#0000</color>
 
 </resources>
