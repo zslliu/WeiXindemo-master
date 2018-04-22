@@ -1,0 +1,15 @@
+<resources>
+
+<string name="app_name">WeiXin</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+<string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="et_hint">请输入需要翻译的单词和句子</string>
+    <string name="clean">清空</string>
+    <string name="translate">翻译</string>
+    <array name="tab_main_title">
+        <item>翻译</item>
+        <item>成语</item>
+        <item>收藏</item>
+    </array>
+</resources>
