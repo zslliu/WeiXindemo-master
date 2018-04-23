@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,46 +14,52 @@
 
         <EditText
             android:id="@+id/edit"
-            android:layout_width="fill_parent"
-            android:layout_height="30pt"
-            android:background="@drawable/bg_edittext_selector"
-            android:gravity="top|left"
-            android:hint="请输入单词"
-            android:minLines="4"
-            android:padding="4dip"
-            android:textColor="#333333"
-            android:textSize="18sp" />
+            android:layout_width="match_parent"
+            android:layout_height="40pt"
+            android:hint="请输入英文单词"
+            android:textColor="@color/white" />
 
-        <TextView
-            android:id="@+id/search"
-            android:layout_width="82dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="4dip"
-            android:background="@drawable/btn_studytool_translate_selector"
-            android:paddingBottom="4dip"
-            android:paddingLeft="8dip"
-            android:paddingRight="8dip"
-            android:paddingTop="4dip"
-            android:text="查询"
-            android:textColor="@android:color/white"
-            android:textSize="22sp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
 
-        <Button
-            android:id="@+id/jz"
-            android:layout_width="40pt"
-            android:layout_height="25pt"
-            android:layout_gravity="center"
-            android:text="句子" />
+            <Button
+                android:id="@+id/search"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="50pt"
+                android:layout_height="wrap_content"
 
+                android:layout_alignParentRight="true"
+                android:background="@color/yellow_primary"
+                android:text="查询"
+                android:textColor="@color/black" />
+
+            <Button
+                android:id="@+id/jz"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="50pt"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:background="@color/yellow_primary"
+                android:text="句子"
+                android:textColor="@color/black" />
+        </RelativeLayout>
         <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:scrollbars="none" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/layout_1"
+                android:orientation="vertical">
             <android.support.v7.widget.CardView
                 android:id="@+id/cardView3"
                 app:cardCornerRadius="8dp"
-                app:cardBackgroundColor="@color/tm"
+                app:cardUseCompatPadding="true"
+                tools:targetApi="lollipop"
+                android:clickable="true"
+                app:cardBackgroundColor="@color/grey_primary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp">
@@ -63,6 +70,17 @@
                 android:textColor="#333333"
                 android:textSize="18sp" />
             </android.support.v7.widget.CardView>
+                <Button
+                    android:id="@+id/dc"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="50pt"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/light_blue_primary"
+                    android:text="收藏"
+                    android:textColor="@color/black"  />
+            </LinearLayout>
         </ScrollView>
+
     </LinearLayout>
 </LinearLayout>

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,8 @@ public class CyFragment extends Fragment {
     private EditText tinput;
     private View view;
     private Button send;
+    private boolean isVisible = true;
+    private LinearLayout layout1;
     private TextView tresponse;
     private TextView tresponse1;
     private TextView tresponse2;
@@ -46,8 +49,11 @@ public class CyFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         this.view= inflater.inflate(R.layout.fragment_cy, container, false);
+        this.view= inflater.inflate(R.layout.fragment_cy, container, false);
         send = (Button) view.findViewById(R.id.send_request);
         tinput = (EditText) view.findViewById(R.id.input1);
+        layout1=(LinearLayout)view.findViewById(R.id.layout);
+        layout1.setVisibility(View.GONE);
         tresponse = (TextView) view.findViewById(R.id.response);
         tresponse1=(TextView)view.findViewById(R.id.response_1);
         tresponse2=(TextView)view.findViewById(R.id.response_2);
@@ -57,6 +63,13 @@ public class CyFragment extends Fragment {
     private class searchListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
+            if (isVisible) {
+                isVisible = false;
+                layout1.setVisibility(View.VISIBLE);//这一句显示布局LinearLayout区域
+            } else {
+                layout1.setVisibility(View.GONE);//这一句即隐藏布局LinearLayout区域
+                isVisible = true;
+            }
             String content = tinput.getText().toString().trim();
             if (content == null || "".equals(content)) {
                 Toast.makeText(getActivity().getApplicationContext(), "请输入要翻译的内容", Toast.LENGTH_SHORT).show();

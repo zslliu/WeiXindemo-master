@@ -1,7 +1,9 @@
 package myapplication.t.example.com.weixin;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,8 +37,14 @@ import java.lang.reflect.Type;
 public class FyFragment extends Fragment {
 
     private EditText edit = null;
-    private TextView search = null;
+    private Button search = null;
     private TextView text = null;
+    private LinearLayout layout2;
+    private Button dc1;
+    private DB db;
+    private String a;
+    private SQLiteDatabase dbRead, dbWrite;
+    private boolean isVisible = true;
     private String YouDaoBaseUrl = "http://fanyi.youdao.com/openapi.do";
     private String YouDaoKeyFrom = "aaa123ddd";
     private String YouDaoKey = "336378893";
@@ -67,9 +76,12 @@ public class FyFragment extends Fragment {
         this.view= inflater.inflate(R.layout.fragment_fy, container, false);
         edit = (EditText)view.findViewById(R.id.edit);
         jz1=(Button)view.findViewById(R.id.jz);
-        search = (TextView)view.findViewById(R.id.search);
+        layout2=(LinearLayout)view.findViewById(R.id.layout_1);
+        layout2.setVisibility(View.GONE);
+        search = (Button)view.findViewById(R.id.search);
         search.setOnClickListener(new searchListener());
         text = (TextView)view.findViewById(R.id.text);
+        dc1=(Button)view.findViewById(R.id.dc);
         handler = new TranslateHandler(this, text);
         jz1.setOnClickListener(new View.OnClickListener()
         {
@@ -81,13 +93,35 @@ public class FyFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        dc1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db = new DB(getActivity().getApplicationContext());
+                dbWrite = db.getWritableDatabase();
+                ContentValues cValue = new ContentValues();
+                cValue.put("word", edit.getText().toString().trim());
+                cValue.put("trans", a);
+                //调用insert()方法插入数据
+                dbWrite.insert("vocab", null, cValue);
+                dbWrite.close();
+                Toast.makeText(getActivity().getApplicationContext(), "成功添加到生词本!", Toast.LENGTH_LONG).show();
+                dc1.setEnabled(false);
+            }
+        });
+
         return  view;
     }
 
     private class searchListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-
+            if (isVisible) {
+                isVisible = false;
+                layout2.setVisibility(View.VISIBLE);//这一句显示布局LinearLayout区域
+            } else {
+                layout2.setVisibility(View.GONE);//这一句即隐藏布局LinearLayout区域
+                isVisible = true;
+            }
             String content = edit.getText().toString().trim();
             if (content == null || "".equals(content)) {
                 Toast.makeText(getActivity().getApplicationContext(), "请输入要翻译的内容", Toast.LENGTH_SHORT).show();
@@ -145,6 +179,7 @@ public class FyFragment extends Fragment {
                         for (String translation : translations) {
                             message += "\t" + translation;
                         }
+                        a=jsonObject.getString("translation");
                         // 有道词典-基本词典
                         if (jsonObject.has("basic")) {
                             JSONObject basic = jsonObject.getJSONObject("basic");
